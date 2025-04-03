@@ -18,7 +18,7 @@ pipeline {
                 script {
                     // Navigate into the tindog directory and build the Docker image
                     dir('tindog') {
-                        sh "docker build -t ${buildTag} ." // Build Docker image with build number appended to the tag
+                        sh 'sudo docker build -t tindog-nginx-3 .' // Build Docker image with build number appended to the tag
                     }
                     sh 'docker images'  // List all available Docker images
                 }
