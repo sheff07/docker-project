@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     // Remove the Docker image
-                    sh "docker rmi ${buildTag} || true"  // Remove the image used for the container
+                    sh 'docker rm -f tindog-container || true'  // Remove the image used for the container
                     sh 'docker images'  // List available images to confirm deletion
 
                     // Clean up Jenkins workspace
