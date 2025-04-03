@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'dennis', url: 'https://github.com/TechNgine/docker-project.git'
+                git branch: 'main', url: 'https://github.com/sheff07/docker-project.git'
             }
         }
 
@@ -18,7 +18,7 @@ pipeline {
                 script {
                     // Navigate into the tindog directory and build the Docker image
                     dir('tindog') {
-                        sh 'sudo docker build -t tindog-nginx-3 .' // Build Docker image with build number appended to the tag
+                        sh 'docker run -d --name tindog-container -p 80:80 tindog-nginx-3' // Build Docker image with build number appended to the tag
                     }
                     sh 'docker images'  // List all available Docker images
                 }
