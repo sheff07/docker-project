@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     // Run the container using the image with the build number appended
-                    sh "docker run -d --name tindog-container -p 80:80 ${buildTag}"
+                    sh 'docker run -d --name tindog-container -p 80:80 tindog-nginx-3'
                     sh 'docker ps -a'  // List all running and stopped containers
                 }
             }
