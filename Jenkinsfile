@@ -19,7 +19,7 @@ pipeline {
                     // Navigate into the tindog directory and build the Docker image
                     dir('tindog') {
                         sh 'docker ps -a -q -f name=tindog-container | xargs -r docker rm -f'
-                        sh 'docker run -d --name tindog-container -p 80:80 tindog-nginx-3' // Build Docker image with build number appended to the tag
+                        sh 'docker run -d --name tindog -p 80:80 tindog-nginx-3' // Build Docker image with build number appended to the tag
                     }
                     sh 'docker images'  // List all available Docker images
                 }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     // Run the container using the image with the build number appended
-                    sh 'docker run -d --name tindog-container -p 80:80 tindog-nginx-3'
+                    sh 'docker run -d --name tindog -p 80:80 tindog-nginx-3'
                     sh 'docker ps -a'  // List all running and stopped containers
                 }
             }
