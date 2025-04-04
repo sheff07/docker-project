@@ -16,12 +16,14 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Navigate into the tindog directory and build the Docker image
-                    dir('tindog') {
-                        sh 'docker ps -a -q -f name=tindog | xargs -r docker rm -f'
-                        sh 'docker run -d --name tindog -p 80:80 tindog-nginx-3' // Build Docker image with build number appended to the tag
-                    }
-                    sh 'docker images'  // List all available Docker images
+            // Ensure any existing container with the name 'tindog' is removed
+            sh 'docker ps -a -q -f name=tindog | xargs -r docker rm -f'
+            
+            // Build the new Docker image if necessary (this may be skipped if the image already exists)
+            sh 'docker build -t tindog-nginx-3 .'
+            
+            // Run the new container
+            sh 'docker run -d --name tindog -p 80:80 tindog-nginx-3'
                 }
             }
         }
