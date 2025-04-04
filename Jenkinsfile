@@ -18,7 +18,7 @@ pipeline {
                 script {
                     // Navigate into the tindog directory and build the Docker image
                     dir('tindog') {
-                        sh 'docker ps -a -q -f name=tindog-container | xargs -r docker rm -f'
+                        sh 'docker ps -a -q -f name=tindog | xargs -r docker rm -f'
                         sh 'docker run -d --name tindog -p 80:80 tindog-nginx-3' // Build Docker image with build number appended to the tag
                     }
                     sh 'docker images'  // List all available Docker images
@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     // Remove the Docker image
-                    sh 'docker rm -f tindog-container || true'  // Remove the image used for the container
+                    sh 'docker rm -f tindog || true'  // Remove the image used for the container
                     sh 'docker images'  // List available images to confirm deletion
 
                     // Clean up Jenkins workspace
